@@ -5,6 +5,15 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Password Reset</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/notify.js/3.0.0/notify.min.js"
+      integrity="sha512-PQMRyb2voatXvVWN0wiKLbGB4U5VSg8xSvdjel7FwiCVquWwNzHs5qmksyZoY+6xPptfMo8m/T/EGVe/8ZxDOw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <style type="text/css">
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
@@ -62,6 +71,11 @@
         text-decoration: none;
         border: 0;
         outline: none;
+      }
+      button:hover {
+        background-color: #572295 !important;
+
+        cursor: pointer;
       }
     </style>
   </head>
@@ -171,7 +185,8 @@
                             bgcolor="#3d087b"
                             style="border-radius: 6px"
                           >
-                            <div
+                            <button
+                              onclick="copyToClipboard('#code'); copyAlert();"
                               style="
                                 display: inline-block;
                                 padding: 0px 50px;
@@ -179,10 +194,14 @@
                                 color: #ffffff;
                                 text-decoration: none;
                                 border-radius: 2px;
+                                background-color: #3d087b;
+                                border: none;
+                                width: 100%;
+                                color: #e9ecef;
                               "
                             >
                               <p id="code">1122334455</p>
-                            </div>
+                            </button>
                           </td>
                         </tr>
                       </table>
@@ -218,4 +237,14 @@
       </tr>
     </table>
   </body>
+  <script>
+    function copyToClipboard(element) {
+      var $temp = $("<input>");
+      $("body").append($temp);
+      $temp.val($(element).text()).select();
+      document.execCommand("copy");
+      $temp.remove();
+      $("#code").notify("Copied on clipboard");
+    }
+  </script>
 </html>
